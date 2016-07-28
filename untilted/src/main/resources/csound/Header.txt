@@ -1,0 +1,29 @@
+<CsoundSynthesizer>
+<CsOptions>
+ -odac
+</CsOptions>
+<CsInstruments>
+sr = 44100
+ksmps = 32
+nchnls = 2
+0dbfs  = 1
+giSine ftgen 0, 0, 2^10, 10, 1
+
+instr 1
+ibasefrq = p4
+ibaseamp = p5/16
+aOsc1     poscil    ibaseamp, ibasefrq, giSine
+aOsc2     poscil    ibaseamp/3, ibasefrq*2, giSine
+aOsc3     poscil    ibaseamp/6, ibasefrq*3, giSine
+aOsc4     poscil    ibaseamp/9, ibasefrq*4, giSine
+aOsc5     poscil    ibaseamp/12, ibasefrq*5, giSine
+aOsc6     poscil    ibaseamp/15, ibasefrq*6, giSine
+aOsc7     poscil    ibaseamp/18, ibasefrq*7, giSine
+aOsc8     poscil    ibaseamp/21, ibasefrq*8, giSine
+kenv      linen     1, 0.5, p3, 0.125
+aOut = aOsc1 + aOsc2 + aOsc3 + aOsc4 + aOsc5 + aOsc6 + aOsc7 + aOsc8
+outs      aOut*kenv, aOut*kenv
+endin
+</CsInstruments>
+
+<CsScore>
