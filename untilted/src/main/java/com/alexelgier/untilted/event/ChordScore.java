@@ -22,6 +22,10 @@ public class ChordScore extends Event {
     return chordSeq;
   }
 
+  public TwoChordSequence getTwoChordSeq(int index) {
+	    return twoChordSeqs[index];
+	  }
+  
   public TwoChordSequence[] getTwoChordSeqs() {
     return twoChordSeqs;
   }

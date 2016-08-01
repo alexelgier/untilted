@@ -123,7 +123,7 @@ public class Translator {
   }
 
   private String getFooter() throws IOException, URISyntaxException {
-    URI footerPath = getClass().getClassLoader().getResource("csound/Header.txt").toURI();
+    URI footerPath = getClass().getClassLoader().getResource("csound/Footer.txt").toURI();
     return new String(Files.readAllBytes(Paths.get(footerPath)));
   }
 
