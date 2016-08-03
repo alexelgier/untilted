@@ -44,6 +44,8 @@ public class EventFactory {
     for (int i = 1; i < roots.length; i++) {
       twoSeqs[i - 1] = twoChordSequence(singleSeq, roots[i], contour);
       twoSeqs[i - 1].getStream().forEach(tc -> {
+      
+      
       });
     }
     ChordScore newScore = new ChordScore(singleSeq, twoSeqs, start, singleSeq.getEnd());
@@ -111,5 +113,18 @@ public class EventFactory {
     return newChordSeq;
   }
 
-
+  /*
+  private TwoChordSequence twoChordSequence(ChordScore chordScore, int root, Contour contour) {
+	    TwoChordSequence newChordSeq = new TwoChordSequence(root, chordScore.getStart(),
+	                                                              chordScore.getEnd());
+	    chordScore.getStream().forEach(c -> {
+	      double lessDissonant = contour.value(c.getStart());
+	      double moreDissonant = (1 - lessDissonant) /  3 + lessDissonant;
+	      Chord newChord = pitchFactory.getChord(c.getChord(), root, moreDissonant);
+	      Chord newChord2 = pitchFactory.getChord(c.getChord(), root, lessDissonant);
+	      newChordSeq.add(twoChordEvent(newChord, newChord2, c.start, c.dur));
+	    });
+	    return newChordSeq;
+	  }
+  */
 }
