@@ -1,35 +1,17 @@
 package com.alexelgier.untilted.space;
 
 public class Instrument {
-	
-	private int xvalue;
-	private int yvalue;
+
+	private Point coord;
 	private String name;
 	private int index;
 	private int root;
-	
-	public Instrument(String name, int index, int root, int xvalue, int yvalue) {
-		this.xvalue = xvalue;
-		this.yvalue = yvalue;
+
+	public Instrument(String name, int index, int root, double xvalue, double yvalue) {
+		this.coord = new Point(xvalue, yvalue);
 		this.name = name;
 		this.root = root;
 		this.index = index;
-	}
-
-	public int getXvalue() {
-		return xvalue;
-	}
-
-	public void setXvalue(int xvalue) {
-		this.xvalue = xvalue;
-	}
-
-	public int getYvalue() {
-		return yvalue;
-	}
-
-	public void setYvalue(int yvalue) {
-		this.yvalue = yvalue;
 	}
 
 	public String getName() {
@@ -39,7 +21,7 @@ public class Instrument {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public int getIndex() {
 		return index;
 	}
@@ -56,4 +38,7 @@ public class Instrument {
 		this.root = root;
 	}
 
+	public Point getCoordinates() {
+	  return coord;
+	}
 }

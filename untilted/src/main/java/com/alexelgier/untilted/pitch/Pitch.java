@@ -117,6 +117,10 @@ public class Pitch {
     return factors.getTenneyHeight();
   }
 
+  public String getKey() {
+    return instrument + instrumentIndex + root;
+  }
+
 }
 
 

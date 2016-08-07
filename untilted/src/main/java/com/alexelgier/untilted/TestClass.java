@@ -5,9 +5,12 @@ import com.alexelgier.untilted.event.ChordScore;
 import com.alexelgier.untilted.event.EventFactory;
 import com.alexelgier.untilted.event.contour.HermiteContour;
 import com.alexelgier.untilted.event.contour.Value;
-
+import com.alexelgier.untilted.space.Centroid;
+import com.alexelgier.untilted.space.InstrumentMap;
+import com.alexelgier.untilted.space.MainInstrumentMap;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 public class TestClass {
 
@@ -36,6 +39,23 @@ public class TestClass {
 
       //output
       System.out.print(score);
+
+
+      MainInstrumentMap map = new MainInstrumentMap();
+      Centroid centroid = map.getCentroid();
+      System.out.print("\nCentroid X: " + centroid.getX()
+      + " - Y: " + centroid.getY()
+      + " - Deviance: " + centroid.getDeviance()
+      + " - Range: " + centroid.getRange());
+      ArrayList<String> keys = new ArrayList<String>();
+      chordScore1.getChordSeq().get(0).getChord().getStream()
+                 .forEach(p -> keys.add(p.getKey()));
+      InstrumentMap newMap = map.getChild(keys);
+      centroid = newMap.getCentroid();
+      System.out.print("\nCentroid X: " + centroid.getX()
+      + " - Y: " + centroid.getY()
+      + " - Deviance: " + centroid.getDeviance()
+      + " - Range: " + centroid.getRange());
 
     } catch (IOException exception) {
       // TODO Auto-generated catch block

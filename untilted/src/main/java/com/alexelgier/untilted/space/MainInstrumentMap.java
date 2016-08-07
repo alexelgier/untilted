@@ -2,6 +2,7 @@ package com.alexelgier.untilted.space;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
 
 import com.opencsv.CSVReader;
@@ -18,15 +19,18 @@ public class MainInstrumentMap extends InstrumentMap {
     String key;
     int root;
     int index;
-    int xvalue;
-    int yvalue;
-    reader.readNext();
+    double xvalue;
+    double yvalue;
+    reader.readNext();  //skip header line
     while ((nextLine = reader.readNext()) != null) {
       name = nextLine[0].trim();
-      root = Integer.parseInt(nextLine[1]);
-      index = Integer.parseInt(nextLine[2]);
-      xvalue = Integer.parseInt(nextLine[3]);
-      yvalue = Integer.parseInt(nextLine[4]);
+      index = Integer.parseInt(nextLine[1]);
+      root = Integer.parseInt(nextLine[2]);
+      xvalue = Double.parseDouble(nextLine[3]);
+      yvalue = Double.parseDouble(nextLine[4]);
+      //Scale coordinates to 1 = 0.5m
+      xvalue = xvalue * 0.5;
+      yvalue = yvalue * 0.5;
       key = name + index + root;
       newInstrument = new Instrument(name, root, index, xvalue, yvalue);
       this.instruments.put(key, newInstrument);
@@ -34,12 +38,12 @@ public class MainInstrumentMap extends InstrumentMap {
     reader.close();
   }
 
-  public InstrumentMap getChild(List<String> keys) {
-    InstrumentMap newMap = new InstrumentMap();
+  public InstrumentMap getChild(List<String> keys) throws NullPointerException {
+    HashMap<String, Instrument> newMap = new HashMap<String, Instrument>();
     for (String key : keys) {
-      newMap.addInstrument(key, this.instruments.get(key));;
+      newMap.put(key, instruments.get(key));
     }
-    return newMap;
+    return new InstrumentMap(newMap);
   }
 
 }
